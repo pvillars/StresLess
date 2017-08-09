@@ -9,7 +9,7 @@ import cl.cutiko.estresless.models.Pending;
  * Created by cutiko on 15-02-17.
  */
 
-public class Queries {
+public class    Queries {
 
     public List<Pending> notDone() {
         List<Pending> pendings = new ArrayList<>();
