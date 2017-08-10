@@ -15,20 +15,25 @@ import android.widget.Toast;
 import cl.cutiko.estresless.R;
 import cl.cutiko.estresless.models.Pending;
 import cl.cutiko.estresless.views.main.pendings.PendingListFragment;
+import cl.cutiko.estresless.views.main.search.SearchFragment;
 import cl.cutiko.estresless.views.main.search.SearchListener;
 
 public class MainActivity extends AppCompatActivity implements PendingCallback, SearchListener {
 
     private PendingListFragment pendingListFragment;
+    private SearchFragment searchFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         pendingListFragment = (PendingListFragment) getSupportFragmentManager().findFragmentById(R.id.pendingListFragment);
+        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.searchFragment);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements PendingCallback, 
     @Override
     public void created(Pending pending) {
         pendingListFragment.addPending(pending);
+        searchFragment.updateList();
     }
 
     @Override
@@ -68,4 +74,6 @@ public class MainActivity extends AppCompatActivity implements PendingCallback, 
     public void searched(String name) {
         pendingListFragment.updateList(name);
     }
+
+
 }

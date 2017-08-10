@@ -18,9 +18,12 @@ import cl.cutiko.estresless.data.Queries;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment{
 
     private SearchListener listener;
+    private AutoCompleteTextView completeTextView;
+
+    ArrayAdapter<String> adapter;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -42,9 +45,8 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final AutoCompleteTextView completeTextView = (AutoCompleteTextView) view;
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, new Queries().names());
-        completeTextView.setAdapter(adapter);
+        completeTextView = (AutoCompleteTextView) view;
+        updateList();
 
         completeTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -53,5 +55,10 @@ public class SearchFragment extends Fragment {
                 listener.searched(name);
             }
         });
+    }
+
+    public void updateList() {
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, new Queries().names());
+        completeTextView.setAdapter(adapter);
     }
 }

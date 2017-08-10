@@ -1,5 +1,6 @@
 package cl.cutiko.estresless.views.main.pendings;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,11 @@ public class PendingListFragment extends Fragment implements PendingClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_pending_list, container, false);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     @Override
@@ -77,6 +83,8 @@ public class PendingListFragment extends Fragment implements PendingClickListene
         intent.putExtra("id", id);
         startActivity(intent);
     }
+
+
 
     @Override
     public void clickedPending(Pending pending) {
